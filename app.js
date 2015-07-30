@@ -10,7 +10,12 @@ var routes = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
+
 mongoose.connect('mongodb://localhost/node-backbone-blog');
+mongoose.connection
+.on('error', function(e) { console.log('Error:', e); })
+.once('open', function() { console.log('Mongo Connection: ok') } );
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
